@@ -37,9 +37,13 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       title: 'About',
-      filename: 'about.html',
+      filename: 'html/about.html',
       template: path.resolve(__dirname, './src/html/about.html'),
-      chunks: [],
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Contents',
+      filename: 'html/contents.html',
+      template: path.resolve(__dirname, './src/html/contents.html'),
     }),
     new ESLintPlugin(),
   ],
@@ -58,9 +62,11 @@ module.exports = {
       {
         test: /\.(scss|css)$/, // load files that end with scss and css
         use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
+          'style-loader', // Step 3 (option 1): inject styles into DOM -> used in dev
+          // eslint-disable-next-line max-len
+          // MiniCssExtractPlugin.loader, // Step 3 (option 2): extract css into files -> used in prod
+          'css-loader', // Step 2: turn css into commonjs
+          'sass-loader', // Step 1: turn sass into css
         ],
       },
       { // define typescript loader and file extensions
