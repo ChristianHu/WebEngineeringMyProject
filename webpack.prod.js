@@ -3,6 +3,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'production',
@@ -29,9 +31,20 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Basic Webpack Setup',
+      title: 'Title Placeholder',
       template: path.resolve(__dirname, './src/index.html'),
     }),
+    new HtmlWebpackPlugin({
+      title: 'About',
+      filename: 'html/about.html',
+      template: path.resolve(__dirname, './src/html/about.html'),
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Contents',
+      filename: 'html/contents.html',
+      template: path.resolve(__dirname, './src/html/contents.html'),
+    }),
+    new MiniCssExtractPlugin({ filename: 'style.css' }),
   ],
   // 5
   // Integrate Babel in the build process
@@ -48,9 +61,10 @@ module.exports = {
       {
         test: /\.(scss|css)$/, // load files that end with scss and css
         use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
+          // 'style-loader', // Step 3 (option 1): inject styles into DOM -> used in dev
+          MiniCssExtractPlugin.loader, // Step 3 (option 2): extract css into files -> used in prod
+          'css-loader', // Step 2: turn css into commonjs
+          'sass-loader', // Step 1: turn sass into css
         ],
       },
       { // define typescript loader and file extensions

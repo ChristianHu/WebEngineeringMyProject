@@ -1,5 +1,25 @@
-$body-color: red;
+$body-color: #1D1D1F;
 
 body {
   color: $body-color;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+nav {
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+
+  ul {
+    margin: 0;
+    list-style: none;
+  }
+  li {
+    display: inline-block;
+  }
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
 }
