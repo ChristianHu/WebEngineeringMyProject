@@ -29,8 +29,14 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Basic Webpack Setup',
+      title: 'Title Placeholder',
       template: path.resolve(__dirname, './src/index.html'),
+    }),
+    new HtmlWebpackPlugin({
+      title: 'About',
+      filename: 'about.html',
+      template: path.resolve(__dirname, './src/html/about.html'),
+      chunks: [],
     }),
   ],
   // 5

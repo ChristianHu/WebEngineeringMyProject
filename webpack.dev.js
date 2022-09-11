@@ -1,6 +1,9 @@
 const path = require('path');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
@@ -28,8 +31,15 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Basic Webpack Setup',
+      title: 'Title Placeholder',
+      filename: 'index.html',
       template: path.resolve(__dirname, './src/index.html'),
+    }),
+    new HtmlWebpackPlugin({
+      title: 'About',
+      filename: 'about.html',
+      template: path.resolve(__dirname, './src/html/about.html'),
+      chunks: [],
     }),
     new ESLintPlugin(),
   ],
