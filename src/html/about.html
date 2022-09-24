@@ -16,5 +16,110 @@
         <li><a href="contents.html">Contents</a></li>
     </ul>
 </nav>
+<h2>Who are we?</h2>
+<p>We are the Chuck Norris fun company, a small but motivated company specializing in spreading the truth about Chuck Norris. Which is why we commit ourselves to giving you the best facts available in the web.
+    If you’re looking for infos about good old Chuck, you’re in the right place. We strive to be industrious and innovative, offering our visitors something they want, putting their desires at the top of our priority list.</p>
+<h3>Want to stay informed? Sign up for the newsletter:</h3>
+<form name="aboutForm" id="aboutForm" autocomplete="off" novalidate>
+    <div class="form-field">
+        <label class="input-label" for="feedback">Feedback Text</label><br>
+        <input type="text" id="feedback" name="feedback"><br>
+        <div class="error"></div>
+    </div>
+    <div class="form-field">
+        <label class="input-label" for="age">Age</label><br>
+        <input type="number" id="age" name="number"><br>
+        <div class="error"></div>
+    </div>
+    <div class="form-field">
+        <label class="input-label" for="password">Password</label><br>
+        <input type="password" id="password" name="password"><br>
+        <div class="error"></div>
+    </div>
+    <div class="form-field">
+        <label class="input-label" for="email">Email</label><br>
+        <input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+        <div class="error"></div>
+    </div>
+    <input type="submit" id="update" value="Submit">
+</form>
+<p class="confirmation-text"></p>
+<script>
+    const aboutForm = document.getElementById('aboutForm');
+    const feedback = document.getElementById('feedback');
+    const age = document.getElementById('age');
+    const password = document.getElementById('password');
+    const email = document.getElementById('email');
+
+    aboutForm.addEventListener('submit', e => {
+        e.preventDefault();
+        console.log("in addEventListener...")
+        validateInputs();
+    });
+
+    const setError = (element, message) => {
+        const input = element.parentElement;
+        const error = input.querySelector('.error');
+
+        error.innerText = message;
+        input.classList.add('error');
+        input.classList.remove('success');
+    }
+
+    const setSuccess = element => {
+        const input = element.parentElement;
+        const error = input.querySelector('.error');
+
+        error.innerText = '';
+        input.classList.add('success');
+        input.classList.remove('error');
+    };
+
+    const validateInputs = () => {
+        const ageValue = age.value;
+        const passwordValue = password.value.trim()
+        const emailValue = email.value.trim()
+
+        if(ageValue === '') {
+            setError(age, 'Age is required');
+        } else if (!isAValidAge(ageValue)) {
+            setError(age, 'Age must be between 0 - 120 years');
+        } else {
+            setSuccess(age);
+        }
+
+        if(passwordValue === '') {
+            setError(password, 'Password is required');
+        } else if (!isAValidPassword(passwordValue)) {
+            setError(password, 'Password must be at least 6 character long and must contain at least one letter and one number.');
+        } else {
+            setSuccess(password);
+        }
+
+        if(emailValue === '') {
+            setError(email, 'Email is required');
+        } else if (!isAValidEmail(emailValue)) {
+            setError(email, 'Enter valid email address');
+        } else {
+            setSuccess(email);
+        }
+    }
+
+    function isAValidAge (age) {
+        console.log("age = " + age);
+        return age > 0 && age < 121;
+    }
+
+    const isAValidEmail = email => {
+        const regex = /^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4})$/;
+        return regex.test(String(email).toLowerCase());
+    }
+
+    const isAValidPassword = password => {
+        console.log("Password to check = " + password);
+        const regex = /^(?=.*[0-9])(?=.*[a-z]).{5,}$/;
+        return regex.test(String(password));
+    }
+</script>
 </body>
 </html>

@@ -28,3 +28,33 @@ h2 {
   width: 100%;
   padding-top: 50px;
 }
+
+.input-label {
+  color: #3B3B3B;
+}
+
+.form-field input {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  border-radius: 2px;
+  border: 1px solid;
+}
+
+.form-field input:focus {
+  outline: 0;
+}
+
+.form-field.success input {
+  border-color: #59C27B;
+}
+
+.form-field.error input {
+  border-color: #E64B62;
+}
+
+.form-field .error {
+  font-size: 11px;
+  color: #E64B62;
+  margin-bottom: 14px;
+  height: 13px;
+}
