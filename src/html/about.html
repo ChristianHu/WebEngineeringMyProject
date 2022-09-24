@@ -42,6 +42,7 @@
         <div class="error"></div>
     </div>
     <input type="submit" id="update" value="Submit">
+    <label class="success-text" id="success-text"></label>
 </form>
 <p class="confirmation-text"></p>
 <script>
@@ -50,32 +51,43 @@
     const age = document.getElementById('age');
     const password = document.getElementById('password');
     const email = document.getElementById('email');
+    const successText = document.getElementById('success-text');
+
+    let validationSuccessful = true;
 
     aboutForm.addEventListener('submit', e => {
+        validationSuccessful = true;
         e.preventDefault();
-        console.log("in addEventListener...")
         validateInputs();
     });
 
-    const setError = (element, message) => {
+    function setError (element, message) {
         const input = element.parentElement;
         const error = input.querySelector('.error');
-
         error.innerText = message;
         input.classList.add('error');
         input.classList.remove('success');
+
+        validationSuccessful = false;
     }
 
-    const setSuccess = element => {
+    function setSuccess (element) {
         const input = element.parentElement;
         const error = input.querySelector('.error');
-
         error.innerText = '';
         input.classList.add('success');
         input.classList.remove('error');
-    };
+    }
 
-    const validateInputs = () => {
+    function showSuccessText (element, message) {
+        element.textContent = message;
+    }
+
+    function hideSuccessText(element) {
+        element.textContent = '';
+    }
+
+    function validateInputs () {
         const ageValue = age.value;
         const passwordValue = password.value.trim()
         const emailValue = email.value.trim()
@@ -103,20 +115,24 @@
         } else {
             setSuccess(email);
         }
+
+        if (validationSuccessful === true) {
+            showSuccessText(successText, 'Successfully signed up.');
+        } else {
+            hideSuccessText(successText);
+        }
     }
 
     function isAValidAge (age) {
-        console.log("age = " + age);
         return age > 0 && age < 121;
     }
 
-    const isAValidEmail = email => {
+    function isAValidEmail (email) {
         const regex = /^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4})$/;
         return regex.test(String(email).toLowerCase());
     }
 
-    const isAValidPassword = password => {
-        console.log("Password to check = " + password);
+    function isAValidPassword (password) {
         const regex = /^(?=.*[0-9])(?=.*[a-z]).{5,}$/;
         return regex.test(String(password));
     }
