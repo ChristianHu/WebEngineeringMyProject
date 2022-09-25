@@ -18,8 +18,7 @@
     </ul>
 </nav>
 <h2>Here are some jokes for you:</h2>
-<button id='add-joke' onclick='addJoke()'>Get Random Joke</button>
-<ol id='contentList'></ol>
+<button id='add-joke' class="add-joke" onclick='addJoke()'>Get Random Joke</button>
 <table id="content-table">
     <tr>
         <th>Jokes</th>
@@ -54,8 +53,10 @@
                 newJokeCell.appendChild(jokeText);
 
                 let addButtonCell = newRow.insertCell(1);
+                addButtonCell.setAttribute('class', 'table-button-cell');
                 const addButton = document.createElement('button');
                 addButton.textContent = 'Add to cart';
+                addButton.setAttribute('class', 'table-button');
                 addButtonCell.appendChild(addButton);
 
                 addButton.addEventListener('click', () => {
@@ -66,8 +67,10 @@
                     newShoppingCartJokeCell.appendChild(shoppingCartJokeText);
 
                     let deleteButtonCell = newShoppingCartRow.insertCell(1);
+                    deleteButtonCell.setAttribute('class', 'table-button-cell');
                     const deleteButton = document.createElement('button');
                     deleteButton.textContent = 'Delete';
+                    deleteButton.setAttribute('class', 'table-button');
                     deleteButtonCell.appendChild(deleteButton);
 
                     deleteButton.addEventListener('click', () => {
