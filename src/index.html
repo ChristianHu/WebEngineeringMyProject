@@ -33,56 +33,65 @@
     </tr>
 </table>
 <script type="text/javascript">
+    let httpRequest;
 
     function addJoke() {
-        const request = new XMLHttpRequest();
+        httpRequest = new XMLHttpRequest();
+        httpRequest.onreadystatechange = alertContents;
+
         // documentation: https://api.chucknorris.io/#!
-        request.open(
+        httpRequest.open(
             "GET",
             'https://api.chucknorris.io/jokes/random',
             true
         );
-        request.onload = function () {
-            if (this.status === 200) {
-                const response = JSON.parse(this.responseText);
+        httpRequest.send();
+    }
 
-                let tableRef = document.getElementById('content-table');
-                let newRow = tableRef.insertRow(-1);    // Insert a row at the end of the table
-                let newJokeCell = newRow.insertCell(0);
-                let jokeText = document.createTextNode(response.value);
-                newJokeCell.appendChild(jokeText);
+    function alertContents() {
+        httpRequest.onreadystatechange = () => {
+            if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+                    const response = JSON.parse(this.responseText);
 
-                let addButtonCell = newRow.insertCell(1);
-                addButtonCell.setAttribute('class', 'table-button-cell');
-                const addButton = document.createElement('button');
-                addButton.textContent = 'Add to cart';
-                addButton.setAttribute('class', 'table-button');
-                addButtonCell.appendChild(addButton);
+                    let tableRef = document.getElementById('content-table');
+                    let newRow = tableRef.insertRow(-1);    // Insert a row at the end of the table
+                    let newJokeCell = newRow.insertCell(0);
+                    let jokeText = document.createTextNode(response.value);
+                    newJokeCell.appendChild(jokeText);
 
-                addButton.addEventListener('click', () => {
-                    let shoppingCartTableRef = document.getElementById('shopping-cart');
-                    let newShoppingCartRow = shoppingCartTableRef.insertRow(-1);    // Insert a row at the end of the table
-                    let newShoppingCartJokeCell = newShoppingCartRow.insertCell(0);
-                    let shoppingCartJokeText = document.createTextNode(response.value);
-                    newShoppingCartJokeCell.appendChild(shoppingCartJokeText);
+                    let addButtonCell = newRow.insertCell(1);
+                    addButtonCell.setAttribute('class', 'table-button-cell');
+                    const addButton = document.createElement('button');
+                    addButton.textContent = 'Add to cart';
+                    addButton.setAttribute('class', 'table-button');
+                    addButtonCell.appendChild(addButton);
 
-                    let deleteButtonCell = newShoppingCartRow.insertCell(1);
-                    deleteButtonCell.setAttribute('class', 'table-button-cell');
-                    const deleteButton = document.createElement('button');
-                    deleteButton.textContent = 'Delete';
-                    deleteButton.setAttribute('class', 'table-button');
-                    deleteButtonCell.appendChild(deleteButton);
+                    addButton.addEventListener('click', () => {
+                        let shoppingCartTableRef = document.getElementById('shopping-cart');
+                        let newShoppingCartRow = shoppingCartTableRef.insertRow(-1);    // Insert a row at the end of the table
+                        let newShoppingCartJokeCell = newShoppingCartRow.insertCell(0);
+                        let shoppingCartJokeText = document.createTextNode(response.value);
+                        newShoppingCartJokeCell.appendChild(shoppingCartJokeText);
 
-                    deleteButton.addEventListener('click', () => {
-                        shoppingCartTableRef.deleteRow(deleteButton.parentElement.parentElement.rowIndex);
+                        let deleteButtonCell = newShoppingCartRow.insertCell(1);
+                        deleteButtonCell.setAttribute('class', 'table-button-cell');
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Delete';
+                        deleteButton.setAttribute('class', 'table-button');
+                        deleteButtonCell.appendChild(deleteButton);
+
+                        deleteButton.addEventListener('click', () => {
+                            shoppingCartTableRef.deleteRow(deleteButton.parentElement.parentElement.rowIndex);
+                        });
                     });
-                });
-
+                } else {
+                    console.log("Error: Problem with request!");
+                }
             } else {
-                console.log("Error: could not fetch joke!");
+                console.log("Info: response not ready yet.");
             }
-        };
-        request.send();
+        }
     }
 </script>
 </body>

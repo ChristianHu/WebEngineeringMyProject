@@ -73,10 +73,10 @@ table, th, td {
 }
 
 .form-input {
-  margin: 3px 0 3px 0;
+  margin: 5px 0 3px 0;
   padding: 0 10px 0 10px;
   border-radius: 2px;
-  border: 1px solid;
+  border: 1px solid lightgrey;
   width: 350px;
   font-size: medium;
   background-color: #F3F5F5;
@@ -86,9 +86,10 @@ table, th, td {
 
 .form-textarea {
   font-family: 'Helvetica', 'Arial', sans-serif;
+  margin-top: 5px;
   padding: 10px;
   border-radius: 2px;
-  border: 1px solid;
+  border: 1px solid lightgrey;;
   width: 350px;
   font-size: medium;
   resize: none;
