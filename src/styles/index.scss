@@ -1,0 +1,31 @@
+table {
+  width: 95%;
+  margin: 10px;
+}
+
+table, th, td {
+  border: 1px solid lightgrey;
+  border-collapse: collapse;
+  padding: 10px;
+}
+
+.shopping-cart-header {
+  background-color: #F3F5F5;
+}
+
+.shopping-cart-button-column {
+  width: 80px;
+}
+
+.table-button {
+  white-space: nowrap;
+  text-align: center;
+  margin: auto;
+  display: block;
+}
+
+.add-joke {
+  margin-left: 10px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
