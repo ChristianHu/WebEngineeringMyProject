@@ -52,6 +52,12 @@ nav {
   }
 }
 
+.add-joke {
+  margin-left: 10px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
 table {
   width: 95%;
   margin: 10px;
@@ -61,6 +67,22 @@ table, th, td {
   border: 1px solid lightgrey;
   border-collapse: collapse;
   padding: 10px;
+}
+
+.shopping-cart-header {
+  background-color: #F3F5F5;
+}
+
+.shopping-cart-button-column {
+  width: 80px;
+}
+
+.table-button {
+  //margin: 5px;
+  white-space: nowrap;
+  text-align: center;
+  margin: auto;
+  display: block;
 }
 
 .about-form {
@@ -121,22 +143,6 @@ table, th, td {
   padding: 10px;
   color: #59C27B;
   font-size: medium;
-}
-
-.add-joke {
-  margin-left: 10px;
-  margin-top: 6px;
-  margin-bottom: 6px;
-}
-
-.table-button-cell {
-  width: 90px;
-}
-
-.table-button {
-  margin: 5px;
-  white-space: nowrap;
-  text-align: center;
 }
 
 @media screen and (max-width: 1920px) {
