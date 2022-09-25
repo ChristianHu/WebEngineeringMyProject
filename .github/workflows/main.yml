@@ -1,0 +1,19 @@
+name: Deploy to GitHub Pages
+
+on:
+  push: 
+    branches: [ release ] # is triggered if push event in release branch occurs
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # run ubuntu
+
+    steps:
+    - uses: actions/checkout@v3 # checkout your repo - this is an official action provided by GitHub
+      with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+        fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+    - name: Run a multi-line script
+      run: |
+        echo test the checkout action,
+        ls -a
