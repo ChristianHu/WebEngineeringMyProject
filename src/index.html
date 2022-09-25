@@ -33,68 +33,65 @@
     </tr>
 </table>
 <script type="text/javascript">
-    let httpRequest;
+  let httpRequest;
 
-    function addJoke() {
-        httpRequest = new XMLHttpRequest();
-        httpRequest.onreadystatechange = alertContents;
+  function getButtonForNewTableRow(tableId, text, buttonTitle) {
+    const newRow = tableId.insertRow(-1);
+    const newJokeCell = newRow.insertCell(0);
+    const jokeText = document.createTextNode(text);
+    newJokeCell.appendChild(jokeText);
 
-        // documentation: https://api.chucknorris.io/#!
-        httpRequest.open(
-            "GET",
-            'https://api.chucknorris.io/jokes/random',
-            true
-        );
-        httpRequest.send();
-    }
+    const buttonCell = newRow.insertCell(1);
+    buttonCell.setAttribute('class', 'table-button-cell');
+    const button = document.createElement('button');
+    button.textContent = buttonTitle;
+    button.setAttribute('class', 'table-button');
+    buttonCell.appendChild(button);
 
-    function alertContents() {
-        try {
-            httpRequest.onreadystatechange = () => {
-                if (httpRequest.readyState === XMLHttpRequest.DONE) {
-                    if (httpRequest.status === 200) {
-                        const response = JSON.parse(this.responseText);
+    return button;
+  }
 
-                        let tableRef = document.getElementById('content-table');
-                        let newRow = tableRef.insertRow(-1);    // Insert a row at the end of the table
-                        let newJokeCell = newRow.insertCell(0);
-                        let jokeText = document.createTextNode(response.value);
-                        newJokeCell.appendChild(jokeText);
+  function alertContents() {
+    try {
+      httpRequest.onreadystatechange = () => {
+        // eslint-disable-next-line no-undef
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+          if (httpRequest.status === 200) {
+            const response = JSON.parse(this.responseText);
 
-                        let addButtonCell = newRow.insertCell(1);
-                        addButtonCell.setAttribute('class', 'table-button-cell');
-                        const addButton = document.createElement('button');
-                        addButton.textContent = 'Add to cart';
-                        addButton.setAttribute('class', 'table-button');
-                        addButtonCell.appendChild(addButton);
+            const contentTableRef = document.getElementById('content-table');
+            const addButton = getButtonForNewTableRow(contentTableRef, response.value, 'Add to cart');
 
-                        addButton.addEventListener('click', () => {
-                            let shoppingCartTableRef = document.getElementById('shopping-cart');
-                            let newShoppingCartRow = shoppingCartTableRef.insertRow(-1);    // Insert a row at the end of the table
-                            let newShoppingCartJokeCell = newShoppingCartRow.insertCell(0);
-                            let shoppingCartJokeText = document.createTextNode(response.value);
-                            newShoppingCartJokeCell.appendChild(shoppingCartJokeText);
+            addButton.addEventListener('click', () => {
+              const shoppingCartTableRef = document.getElementById('shopping-cart');
+              const removeButton = getButtonForNewTableRow(shoppingCartTableRef, response.value, 'Remove');
 
-                            let removeButtonCell = newShoppingCartRow.insertCell(1);
-                            removeButtonCell.setAttribute('class', 'table-button-cell');
-                            const removeButton = document.createElement('button');
-                            removeButton.textContent = 'Remove';
-                            removeButton.setAttribute('class', 'table-button');
-                            removeButtonCell.appendChild(removeButton);
-
-                            removeButton.addEventListener('click', () => {
-                                shoppingCartTableRef.deleteRow(removeButton.parentElement.parentElement.rowIndex);
-                            });
-                        });
-                    } else {
-                        console.log("Error: Problem with request!");
-                    }
-                }
-            }
-        } catch (e) {
-            console.log('Caught exception: ' + e.description);
+              removeButton.addEventListener('click', () => {
+                shoppingCartTableRef.deleteRow(removeButton.parentElement.parentElement.rowIndex);
+              });
+            });
+          } else {
+            console.log('Error: Problem with request!');
+          }
         }
+      };
+    } catch (e) {
+      console.log(`Caught exception: ${e.description}`);
     }
+  }
+
+  function addJoke() {
+    httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = alertContents;
+
+    // documentation: https://api.chucknorris.io/#!
+    httpRequest.open(
+      'GET',
+      'https://api.chucknorris.io/jokes/random',
+      true,
+    );
+    httpRequest.send();
+  }
 </script>
 </body>
 </html>
