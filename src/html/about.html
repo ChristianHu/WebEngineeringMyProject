@@ -27,6 +27,11 @@
         <div class="error"></div>
     </div>
     <div class="form-field">
+        <label class="form-label" for="name">Last name</label><br>
+        <input class="form-input" type="text" id="name" name="name"><br>
+        <div class="error"></div>
+    </div>
+    <div class="form-field">
         <label class="form-label" for="age">Age</label><br>
         <input class="form-input" type="number" id="age" name="number"><br>
         <div class="error"></div>
@@ -38,7 +43,7 @@
     </div>
     <div class="form-field">
         <label class="form-label" for="email">Email</label><br>
-        <input class="form-input" type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+        <input class="form-input" type="email" id="email" name="email"><br>
         <div class="error"></div>
     </div>
     <input type="submit" id="update" value="Submit">
@@ -48,6 +53,7 @@
 <script>
     const aboutForm = document.getElementById('about-form');
     const feedback = document.getElementById('feedback');
+    const name = document.getElementById('name');
     const age = document.getElementById('age');
     const password = document.getElementById('password');
     const email = document.getElementById('email');
@@ -88,9 +94,18 @@
     }
 
     function validateInputs () {
+        const nameValue = name.value;
         const ageValue = age.value;
         const passwordValue = password.value.trim()
         const emailValue = email.value.trim()
+
+        if(nameValue === '') {
+            setError(name, 'Last Name is required');
+        } else if (!isAValidName(nameValue)) {
+            setError(name, 'Only characters and "-", "_" and " " are allowed.');
+        } else {
+            setSuccess(name);
+        }
 
         if(ageValue === '') {
             setError(age, 'Age is required');
@@ -121,6 +136,11 @@
         } else {
             hideSuccessText(successText);
         }
+    }
+
+    function isAValidName (name) {
+        const regex =/[A-Za-z.\s_-]$/;
+        return regex.test(String(name));
     }
 
     function isAValidAge (age) {
