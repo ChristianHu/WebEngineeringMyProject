@@ -55,9 +55,9 @@
 
     let validationSuccessful = true;
 
-    aboutForm.addEventListener('submit', e => {
+    aboutForm.addEventListener('submit', event => {
         validationSuccessful = true;
-        e.preventDefault();
+        event.preventDefault();
         validateInputs();
     });
 
