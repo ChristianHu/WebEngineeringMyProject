@@ -52,6 +52,12 @@ nav {
   }
 }
 
+.add-joke {
+  margin-left: 10px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
 table {
   width: 95%;
   margin: 10px;
@@ -61,6 +67,22 @@ table, th, td {
   border: 1px solid lightgrey;
   border-collapse: collapse;
   padding: 10px;
+}
+
+.shopping-cart-header {
+  background-color: #F3F5F5;
+}
+
+.shopping-cart-button-column {
+  width: 80px;
+}
+
+.table-button {
+  //margin: 5px;
+  white-space: nowrap;
+  text-align: center;
+  margin: auto;
+  display: block;
 }
 
 .about-form {
@@ -77,10 +99,9 @@ table, th, td {
   padding: 0 10px 0 10px;
   border-radius: 2px;
   border: 1px solid lightgrey;
-  width: 350px;
+  width: 500px;
   font-size: medium;
   background-color: #F3F5F5;
-
   height: 30px;
 }
 
@@ -90,13 +111,13 @@ table, th, td {
   padding: 10px;
   border-radius: 2px;
   border: 1px solid lightgrey;;
-  width: 350px;
+  width: 500px;
   font-size: medium;
   resize: none;
   outline: none;
   background-color: #F3F5F5;
 
-  height: 100px;
+  height: 110px;
 }
 
 .form-field input:focus {
@@ -124,23 +145,40 @@ table, th, td {
   font-size: medium;
 }
 
-.add-joke {
-  margin-left: 10px;
-  margin-top: 6px;
-  margin-bottom: 6px;
+@media screen and (max-width: 1920px) {
+  .form-field input {
+    width: 450px;
+  }
+
+  .form-textarea {
+    width: 450px;
+    height: 100px;
+  }
 }
 
-.table-button-cell {
-  width: 90px;
+@media screen and (max-width: 1440px) {
+  .form-field input {
+    width: 400px;
+  }
+
+  .form-textarea {
+    width: 400px;
+    height: 90px;
+  }
 }
 
-.table-button {
-  margin: 5px;
-  white-space: nowrap;
-  text-align: center;
+@media screen and (max-width: 450px) {
+  .form-field input {
+    width: 94%;
+  }
+
+  .form-textarea {
+    width: 94%;
+    height: 70px;
+  }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 360px) {
   .form-field input {
     width: 94%;
   }
