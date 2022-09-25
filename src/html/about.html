@@ -20,25 +20,25 @@
 <p>We are the Chuck Norris fun company, a small but motivated company specializing in spreading the truth about Chuck Norris. Which is why we commit ourselves to giving you the best facts available in the web.
     If you’re looking for infos about good old Chuck, you’re in the right place. We strive to be industrious and innovative, offering our visitors something they want, putting their desires at the top of our priority list.</p>
 <h3>Want to stay informed? Sign up for the newsletter:</h3>
-<form name="aboutForm" id="aboutForm" autocomplete="off" novalidate>
+<form class="about-form" name="about-form" id="about-form" autocomplete="off" novalidate>
     <div class="form-field">
-        <label class="input-label" for="feedback">Feedback Text</label><br>
-        <input type="text" id="feedback" name="feedback"><br>
+        <label class="form-label" for="feedback">Feedback Text</label><br>
+        <textarea class="form-textarea" id="feedback" name="feedback"></textarea>
         <div class="error"></div>
     </div>
     <div class="form-field">
-        <label class="input-label" for="age">Age</label><br>
-        <input type="number" id="age" name="number"><br>
+        <label class="form-label" for="age">Age</label><br>
+        <input class="form-input" type="number" id="age" name="number"><br>
         <div class="error"></div>
     </div>
     <div class="form-field">
-        <label class="input-label" for="password">Password</label><br>
-        <input type="password" id="password" name="password"><br>
+        <label class="form-label" for="password">Password</label><br>
+        <input class="form-input" type="password" id="password" name="password"><br>
         <div class="error"></div>
     </div>
     <div class="form-field">
-        <label class="input-label" for="email">Email</label><br>
-        <input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+        <label class="form-label" for="email">Email</label><br>
+        <input class="form-input" type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
         <div class="error"></div>
     </div>
     <input type="submit" id="update" value="Submit">
@@ -46,7 +46,7 @@
 </form>
 <p class="confirmation-text"></p>
 <script>
-    const aboutForm = document.getElementById('aboutForm');
+    const aboutForm = document.getElementById('about-form');
     const feedback = document.getElementById('feedback');
     const age = document.getElementById('age');
     const password = document.getElementById('password');
@@ -117,7 +117,7 @@
         }
 
         if (validationSuccessful === true) {
-            showSuccessText(successText, 'Successfully signed up.');
+            showSuccessText(successText, 'Done, successfully signed up!');
         } else {
             hideSuccessText(successText);
         }

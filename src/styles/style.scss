@@ -3,50 +3,99 @@ $body-color: #1D1D1F;
 body {
   color: $body-color;
   font-family: 'Helvetica', 'Arial', sans-serif;
+  margin: 0;
+}
+
+h1 {
+  background-color: #85D994;
+  padding: 10px;
+  margin: 0;
+}
+
+h2 {
+  padding: 20px 10px 0 10px;
+  margin: 0;
+}
+
+h3 {
+  padding: 20px 10px 0 10px;
+  margin: 0;
+}
+
+p {
+  padding: 20px 10px 10px 10px;
+  margin: 0;
+}
+
+label {
+  margin: 0;
 }
 
 nav {
-  width: 100%;
-  position: fixed;
-  z-index: 1;
+  padding: 10px;
+  margin: 0;
+  background-color: #85D994;
 
   ul {
     margin: 0;
+    padding: 0;
     list-style: none;
   }
   li {
     display: inline-block;
+    margin-right: 12px;
   }
   a {
-    display: block;
-    padding: 6px 12px;
+    padding: 6px 0;
     text-decoration: none;
+    color: #1D1D1F;
   }
-}
-
-h2 {
-  width: 100%;
-  padding-top: 50px;
 }
 
 table {
-  width: 100%;
+  width: 95%;
+  margin: 10px;
 }
 
 table, th, td {
   border: 1px solid lightgrey;
   border-collapse: collapse;
+  padding: 10px;
 }
 
-.input-label {
+.about-form {
+  padding: 20px 10px 0 10px;
+  margin: 0;
+}
+
+.form-label {
   color: black;
 }
 
-.form-field input {
-  margin-top: 3px;
-  margin-bottom: 3px;
+.form-input {
+  margin: 3px 0 3px 0;
+  padding: 0 10px 0 10px;
   border-radius: 2px;
   border: 1px solid;
+  width: 350px;
+  font-size: medium;
+  background-color: #F3F5F5;
+
+  height: 30px;
+}
+
+.form-textarea {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  padding: 10px;
+  border-radius: 2px;
+  border: 1px solid;
+  width: 350px;
+  font-size: medium;
+  resize: none;
+  outline: none;
+  background-color: #F3F5F5;
+
+  height: 100px;
 }
 
 .form-field input:focus {
@@ -62,8 +111,41 @@ table, th, td {
 }
 
 .form-field .error {
-  font-size: 11px;
+  font-size: small;
   color: #E64B62;
   margin-bottom: 14px;
   height: 13px;
+}
+
+.success-text {
+  padding: 10px;
+  color: #59C27B;
+  font-size: medium;
+}
+
+.add-joke {
+  margin-left: 10px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.table-button-cell {
+  width: 90px;
+}
+
+.table-button {
+  margin: 5px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+@media screen and (max-width: 400px) {
+  .form-field input {
+    width: 94%;
+  }
+
+  .form-textarea {
+    width: 94%;
+    height: 60px;
+  }
 }

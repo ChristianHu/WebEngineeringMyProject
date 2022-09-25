@@ -31,7 +31,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Title Placeholder',
+      title: 'Hand curated Chuck Norris facts!',
       template: path.resolve(__dirname, './src/index.html'),
     }),
     new HtmlWebpackPlugin({
