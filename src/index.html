@@ -18,29 +18,65 @@
     </ul>
 </nav>
 <h2>Here are some jokes for you:</h2>
-<button id='refresh-content' onclick='refreshContent()'>Refresh</button>
+<button id='add-joke' onclick='addJoke()'>Get Random Joke</button>
 <ol id='contentList'></ol>
+<table id="content-table">
+    <tr>
+        <th>Jokes</th>
+        <th></th>
+    </tr>
+</table>
+<h2>Shopping Cart:</h2>
+<table id="shopping-cart">
+    <tr>
+        <th>Jokes</th>
+        <th></th>
+    </tr>
+</table>
 <script type="text/javascript">
-    function refreshContent() {
+
+    function addJoke() {
         const request = new XMLHttpRequest();
-        // documentation: https://www.icndb.com/api/
+        // documentation: https://api.chucknorris.io/#!
         request.open(
             "GET",
-            'http://api.icndb.com/jokes/random/5',
+            'https://api.chucknorris.io/jokes/random',
             true
         );
         request.onload = function () {
             if (this.status === 200) {
-                let output = "";
                 const response = JSON.parse(this.responseText);
-                if (response.type === "success") {
-                    response.value.forEach(function (responseValue) {
-                        output += `<li>${responseValue.joke}</li>`;
+
+                let tableRef = document.getElementById('content-table');
+                let newRow = tableRef.insertRow(-1);    // Insert a row at the end of the table
+                let newJokeCell = newRow.insertCell(0);
+                let jokeText = document.createTextNode(response.value);
+                newJokeCell.appendChild(jokeText);
+
+                let addButtonCell = newRow.insertCell(1);
+                const addButton = document.createElement('button');
+                addButton.textContent = 'Add to cart';
+                addButtonCell.appendChild(addButton);
+
+                addButton.addEventListener('click', () => {
+                    let shoppingCartTableRef = document.getElementById('shopping-cart');
+                    let newShoppingCartRow = shoppingCartTableRef.insertRow(-1);    // Insert a row at the end of the table
+                    let newShoppingCartJokeCell = newShoppingCartRow.insertCell(0);
+                    let shoppingCartJokeText = document.createTextNode(response.value);
+                    newShoppingCartJokeCell.appendChild(shoppingCartJokeText);
+
+                    let deleteButtonCell = newShoppingCartRow.insertCell(1);
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete';
+                    deleteButtonCell.appendChild(deleteButton);
+
+                    deleteButton.addEventListener('click', () => {
+                        shoppingCartTableRef.deleteRow(deleteButton.parentElement.parentElement.rowIndex);
                     });
-                } else {
-                    output += '<li>Error: could not fetch jokes!</li>';
-                }
-                document.querySelector("#contentList").innerHTML = output;
+                });
+
+            } else {
+                console.log("Error: could not fetch joke!");
             }
         };
         request.send();
